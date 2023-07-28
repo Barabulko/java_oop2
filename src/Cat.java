@@ -1,4 +1,6 @@
-public class Cat implements Pet{
+public class Cat implements Pet {
+
+    private final int PAWS=4;
     private String name;
     private Integer age;
 
@@ -9,13 +11,16 @@ public class Cat implements Pet{
 
     @Override
     public String toString() {
-        String res = String.format("Мяу! Меня зовут %s. Мне %s года(лет), у меня %d лап.\n", this.name, this.age, PAWS);
+        String res = String.format("Мяу! Меня зовут %s. Мне %s года(лет), у меня %d лап.\n", this.getName(), this.getAge(), PAWS);
         return res;
     }
 
 //    public Integer getAge() {
 //        return age;
 //    }
+    public Integer getAge() {
+        return this.age;
+    };
 
     public void setAge(Integer age) {
         this.age = age;
@@ -33,4 +38,23 @@ public class Cat implements Pet{
         System.out.println(this);
     }
 
+    @Override
+    public void play() {
+        System.out.println("--Переопределение функции из функционального интерфейса--");
+    }
+
+    public static class CatComparatorByAge implements CatComparator {
+
+        @Override
+        public int compare(Cat cat1, Cat cat2) {
+            return Integer.compare(cat1.getAge(), cat2.getAge());
+        }
+    }
+
+    public static class CatComparatorByName implements CatComparator {
+        @Override
+        public int compare(Cat cat1, Cat cat2) {
+            return Double.compare(cat1.getName().length(), cat2.getName().length());
+        }
+    }
 }
